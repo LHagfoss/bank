@@ -39,6 +39,7 @@ fn main() {
     let id_three: Uuid = Uuid::new_v4();
     info!("Opened \"Account One\"");
     info!("Opened \"Account Two\"");
+    info!("ID of fake account: {}", id_three);
 
     match bank.transfer(id_one, id_two, 250.0) {
         Ok(_) => info!("Transfer successful"),

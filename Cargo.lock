@@ -224,6 +224,8 @@ dependencies = [
 [[package]]
 name = "lagos_logger"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "905c8b8a44c473ba63374508cd420c3f3dea2e6b436d88e5a60e0b31e3854df6"
 dependencies = [
  "chrono",
  "colored",
