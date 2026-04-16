@@ -2,6 +2,7 @@ use crate::{account::Account, bank::Bank};
 use colored::*;
 use lagos_logger::*;
 use person::Person;
+use uuid::Uuid;
 
 mod account;
 mod account_store;
@@ -35,6 +36,7 @@ fn main() {
 
     let id_one = bank.open_account(account_one).unwrap();
     let id_two = bank.open_account(account_two).unwrap();
+    let id_three: Uuid = Uuid::new_v4();
     info!("Opened \"Account One\"");
     info!("Opened \"Account Two\"");
 
@@ -57,15 +59,18 @@ fn main() {
         Err(error) => error!("Phone number update failed: {}", error),
     }
 
-    // log!(
-    //     "Bank Status: {}",
-    //     serde_json::to_string_pretty(&bank.accounts()).unwrap()
-    // );
-
     if let Some(account) = bank.accounts.find_by_id(id_one) {
         info!(
-            "Found account: {}",
-            serde_json::to_string_pretty(account).unwrap()
+            "Account found! ID: {}, Name: {}",
+            account.uuid, account.name
         );
+
+        // info!("{}", serde_json::to_string_pretty(&account).unwrap());
+    }
+
+    if bank.accounts.exists(id_three) {
+        info!("Account exists");
+    } else {
+        warn!("Account does not exist");
     }
 }

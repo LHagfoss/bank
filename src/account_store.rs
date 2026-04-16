@@ -17,8 +17,14 @@ impl AccountStore {
         }
     }
 
-    pub fn list_all(&self) -> Vec<&Account> {
-        self.inner.values().collect()
+    pub fn list_all(&self) -> Option<Vec<&Account>> {
+        if self.inner.is_empty() {
+            return None;
+        }
+
+        let accounts = self.inner.values().collect();
+
+        Some(accounts)
     }
 
     pub fn find_by_id(&self, account_id: Uuid) -> Option<&Account> {
@@ -33,5 +39,9 @@ impl AccountStore {
 
     pub fn find_by_name(&self, name: &str) -> Option<&Account> {
         self.inner.values().find(|a| a.person.name == name)
+    }
+
+    pub fn exists(&self, account_id: Uuid) -> bool {
+        self.inner.contains_key(&account_id)
     }
 }
