@@ -27,6 +27,10 @@ impl AccountStore {
         Some(accounts)
     }
 
+    pub fn get_mut(&mut self, account_id: Uuid) -> Option<&mut Account> {
+        self.inner.get_mut(&account_id)
+    }
+
     pub fn find_by_id(&self, account_id: Uuid) -> Option<&Account> {
         self.inner.get(&account_id)
     }

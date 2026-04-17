@@ -63,7 +63,7 @@ fn main() {
 
     error!("error error error test");
 
-    if let Some(herman_account) = bank.accounts.inner.get_mut(&id_two) {
+    if let Some(herman_account) = bank.accounts.get_mut(id_two) {
         match herman_account.person.update_name("hermanerku") {
             Ok(_) => info!("Name updated successfully"),
             Err(error) => error!("Name update failed: {}", error),
@@ -81,7 +81,7 @@ fn main() {
             account.uuid, account.name
         );
 
-        // info!("{}", serde_json::to_string_pretty(&account).unwrap());
+        // info!("{}", serde_json::to_string_pretty(&accounts.list_all).unwrap());
     }
 
     if bank.accounts.exists(id_three) {
