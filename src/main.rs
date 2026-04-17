@@ -11,28 +11,41 @@ mod card;
 mod person;
 
 fn main() {
+    info!("Initializing bank...");
+    std::thread::sleep(std::time::Duration::from_secs(2)); // fake delay 🤓
+
     let mut bank = Bank::new();
     info!("Bank initialized!");
+
+    std::thread::sleep(std::time::Duration::from_secs(1));
 
     let person_one = Person::new("lucas", 18, Some(47669901));
     let person_two = Person::new("herman", 18, None);
     info!("New Person: \"Lucas\"");
     info!("New Person: \"Herman\"");
 
+    std::thread::sleep(std::time::Duration::from_secs(1));
+
     let mut account_one = Account::new("account one", person_one);
     let mut account_two = Account::new("account two", person_two);
     info!("New Account: \"Account One\"");
     info!("New Account: \"Account Two\"");
+
+    std::thread::sleep(std::time::Duration::from_secs(1));
 
     account_one.deposit(100.0);
     account_one.issue_card("lagos card").unwrap();
     info!("Deposited 100.0 into Accoutn One");
     info!("Issued \"Lagos Card\" for Account One");
 
+    std::thread::sleep(std::time::Duration::from_secs(1));
+
     account_two.deposit(20.0);
     account_two.issue_card("herman card").unwrap();
     info!("Deposited 20.0 into Account Two");
     info!("Issued \"Herman Card\" for Account Two");
+
+    std::thread::sleep(std::time::Duration::from_secs(1));
 
     let id_one = bank.open_account(account_one).unwrap();
     let id_two = bank.open_account(account_two).unwrap();
@@ -40,6 +53,8 @@ fn main() {
     info!("Opened \"Account One\"");
     info!("Opened \"Account Two\"");
     info!("ID of fake account: {}", id_three);
+
+    std::thread::sleep(std::time::Duration::from_secs(1));
 
     match bank.transfer(id_one, id_two, 250.0) {
         Ok(_) => info!("Transfer successful"),
